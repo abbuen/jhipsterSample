@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreated",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170329234410",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "department",
+    "pagination": "pagination"
+}

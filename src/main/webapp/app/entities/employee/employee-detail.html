@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="testApp.employee.detail.title">Employee</span> {{vm.employee.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="testApp.employee.name">Name</span></dt>
+        <dd>
+            <span>{{vm.employee.name}}</span>
+        </dd>
+        <dt><span data-translate="testApp.employee.position">Position</span></dt>
+        <dd>
+            <span>{{vm.employee.position}}</span>
+        </dd>
+        <dt><span data-translate="testApp.employee.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.employee.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="testApp.employee.birthDate">Birth Date</span></dt>
+        <dd>
+            <span>{{vm.employee.birthDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="testApp.employee.department">Department</span></dt>
+        <dd>
+            <a ui-sref="department-detail({id:vm.employee.department.id})">{{vm.employee.department.name}}</a>
+        </dd>
+        <dt><span data-translate="testApp.employee.company">Company</span></dt>
+        <dd>
+            <a ui-sref="company-detail({id:vm.employee.company.id})">{{vm.employee.company.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="employee-detail.edit({id:vm.employee.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
