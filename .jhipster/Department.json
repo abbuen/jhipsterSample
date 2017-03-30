@@ -3,7 +3,7 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "departmentName",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -18,7 +18,7 @@
             "fieldType": "LocalDate"
         }
     ],
-    "changelogDate": "20170329234410",
+    "changelogDate": "20170330044351",
     "dto": "no",
     "service": "serviceImpl",
     "entityTableName": "department",

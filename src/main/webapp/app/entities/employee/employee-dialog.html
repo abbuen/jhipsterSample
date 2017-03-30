@@ -26,12 +26,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="testApp.employee.position" for="field_position">Position</label>
-            <input type="text" class="form-control" name="position" id="field_position"
-                    ng-model="vm.employee.position"
-                    />
-        </div>
-        <div class="form-group">
             <label class="control-label" data-translate="testApp.employee.startDate" for="field_startDate">Start Date</label>
                 <div class="input-group">
                     <input id="field_startDate" type="text" class="form-control" name="startDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.employee.startDate" is-open="vm.datePickerOpenStatus.startDate"
@@ -57,10 +51,22 @@
                     </span>
                 </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="testApp.employee.position" for="field_position">Position</label>
+            <input type="text" class="form-control" name="position" id="field_position"
+                    ng-model="vm.employee.position"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="testApp.employee.address" for="field_address">Address</label>
+            <input type="text" class="form-control" name="address" id="field_address"
+                    ng-model="vm.employee.address"
+                    />
+        </div>
 
         <div class="form-group">
             <label data-translate="testApp.employee.department" for="field_department">Department</label>
-            <select class="form-control" id="field_department" name="department" ng-model="vm.employee.department" ng-options="department as department.name for department in vm.departments track by department.id" required>
+            <select class="form-control" id="field_department" name="department" ng-model="vm.employee.department" ng-options="department as department.departmentName for department in vm.departments track by department.id" required>
                 <option value=""></option>
             </select>
         </div>
@@ -72,7 +78,7 @@
         </div>
         <div class="form-group">
             <label data-translate="testApp.employee.company" for="field_company">Company</label>
-            <select class="form-control" id="field_company" name="company" ng-model="vm.employee.company" ng-options="company as company.name for company in vm.companies track by company.id" required>
+            <select class="form-control" id="field_company" name="company" ng-model="vm.employee.company" ng-options="company as company.companyName for company in vm.companies track by company.id" required>
                 <option value=""></option>
             </select>
         </div>

@@ -4,9 +4,9 @@
         .module('testApp')
         .factory('Company', Company);
 
-    Company.$inject = ['$resource'];
+    Company.$inject = ['$resource', 'DateUtils'];
 
-    function Company ($resource) {
+    function Company ($resource, DateUtils) {
         var resourceUrl =  'api/companies/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,11 +16,27 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.dateCreated = DateUtils.convertLocalDateFromServer(data.dateCreated);
                     }
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    copy.dateCreated = DateUtils.convertLocalDateToServer(copy.dateCreated);
+                    return angular.toJson(copy);
+                }
+            },
+            'save': {
+                method: 'POST',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    copy.dateCreated = DateUtils.convertLocalDateToServer(copy.dateCreated);
+                    return angular.toJson(copy);
+                }
+            }
         });
     }
 })();

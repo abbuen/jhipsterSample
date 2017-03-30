@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Department"
             },
-            "name": "Name",
+            "departmentName": "Department Name",
             "description": "Description",
             "dateCreated": "Date Created"
         }

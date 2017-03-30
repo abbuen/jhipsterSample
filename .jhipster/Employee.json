@@ -8,7 +8,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "name"
+            "otherEntityField": "departmentName"
         },
         {
             "relationshipName": "company",
@@ -17,7 +17,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "name"
+            "otherEntityField": "companyName"
         }
     ],
     "fields": [
@@ -29,10 +29,6 @@
             ]
         },
         {
-            "fieldName": "position",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "startDate",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
@@ -42,9 +38,17 @@
         {
             "fieldName": "birthDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
         }
     ],
-    "changelogDate": "20170329234025",
+    "changelogDate": "20170330044710",
     "dto": "no",
     "service": "serviceImpl",
     "entityTableName": "employee",

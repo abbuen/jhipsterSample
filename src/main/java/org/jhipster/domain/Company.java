@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -24,15 +25,17 @@ public class Company implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @NotNull
-    @Column(name = "location", nullable = false)
-    private String location;
+    @Column(name = "company_name", nullable = false)
+    private String companyName;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
 
     public Long getId() {
         return id;
@@ -42,17 +45,30 @@ public class Company implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public Company name(String name) {
-        this.name = name;
+    public Company companyName(String companyName) {
+        this.companyName = companyName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Company description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocation() {
@@ -68,17 +84,17 @@ public class Company implements Serializable {
         this.location = location;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
-    public Company description(String description) {
-        this.description = description;
+    public Company dateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     @Override
@@ -105,9 +121,10 @@ public class Company implements Serializable {
     public String toString() {
         return "Company{" +
             "id=" + id +
-            ", name='" + name + "'" +
-            ", location='" + location + "'" +
+            ", companyName='" + companyName + "'" +
             ", description='" + description + "'" +
+            ", location='" + location + "'" +
+            ", dateCreated='" + dateCreated + "'" +
             '}';
     }
 }

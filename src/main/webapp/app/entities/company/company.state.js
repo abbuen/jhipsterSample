@@ -124,9 +124,10 @@
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
-                                location: null,
+                                companyName: null,
                                 description: null,
+                                location: null,
+                                dateCreated: null,
                                 id: null
                             };
                         }

@@ -19,7 +19,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="testApp.department.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="departmentName"><span data-translate="testApp.department.departmentName">Department Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="testApp.department.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="dateCreated"><span data-translate="testApp.department.dateCreated">Date Created</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -28,7 +28,7 @@
             <tbody>
                 <tr ng-repeat="department in vm.departments track by department.id">
                     <td><a ui-sref="department-detail({id:department.id})">{{department.id}}</a></td>
-                    <td>{{department.name}}</td>
+                    <td>{{department.departmentName}}</td>
                     <td>{{department.description}}</td>
                         <td>{{department.dateCreated | date:'mediumDate'}}</td>
                     <td class="text-right">

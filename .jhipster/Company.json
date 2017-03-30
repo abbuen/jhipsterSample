@@ -3,14 +3,7 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "name",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "location",
+            "fieldName": "companyName",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -19,9 +12,17 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreated",
+            "fieldType": "LocalDate"
         }
     ],
-    "changelogDate": "20170329234739",
+    "changelogDate": "20170330044202",
     "dto": "no",
     "service": "serviceImpl",
     "entityTableName": "company",

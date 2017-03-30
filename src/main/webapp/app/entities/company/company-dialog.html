@@ -14,25 +14,13 @@
                     ng-model="vm.company.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="testApp.company.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.company.name"
+            <label class="control-label" data-translate="testApp.company.companyName" for="field_companyName">Company Name</label>
+            <input type="text" class="form-control" name="companyName" id="field_companyName"
+                    ng-model="vm.company.companyName"
                     required/>
-            <div ng-show="editForm.name.$invalid">
+            <div ng-show="editForm.companyName.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="testApp.company.location" for="field_location">Location</label>
-            <input type="text" class="form-control" name="location" id="field_location"
-                    ng-model="vm.company.location"
-                    required/>
-            <div ng-show="editForm.location.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.location.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.companyName.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
@@ -42,6 +30,22 @@
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="vm.company.description"
                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="testApp.company.location" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="vm.company.location"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="testApp.company.dateCreated" for="field_dateCreated">Date Created</label>
+                <div class="input-group">
+                    <input id="field_dateCreated" type="text" class="form-control" name="dateCreated" uib-datepicker-popup="{{dateformat}}" ng-model="vm.company.dateCreated" is-open="vm.datePickerOpenStatus.dateCreated"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateCreated')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
         </div>
 
     </div>

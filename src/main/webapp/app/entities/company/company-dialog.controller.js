@@ -12,6 +12,8 @@
 
         vm.company = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
 
         $timeout(function (){
@@ -41,6 +43,10 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.dateCreated = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

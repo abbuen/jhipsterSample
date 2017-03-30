@@ -125,9 +125,10 @@
                         entity: function () {
                             return {
                                 name: null,
-                                position: null,
                                 startDate: null,
                                 birthDate: null,
+                                position: null,
+                                address: null,
                                 id: null
                             };
                         }

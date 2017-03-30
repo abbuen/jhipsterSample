@@ -16,9 +16,10 @@
                 "title": "Employee"
             },
             "name": "Name",
-            "position": "Position",
             "startDate": "Start Date",
             "birthDate": "Birth Date",
+            "position": "Position",
+            "address": "Address",
             "department": "Department",
             "company": "Company"
         }

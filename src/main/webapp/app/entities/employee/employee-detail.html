@@ -8,10 +8,6 @@
         <dd>
             <span>{{vm.employee.name}}</span>
         </dd>
-        <dt><span data-translate="testApp.employee.position">Position</span></dt>
-        <dd>
-            <span>{{vm.employee.position}}</span>
-        </dd>
         <dt><span data-translate="testApp.employee.startDate">Start Date</span></dt>
         <dd>
             <span>{{vm.employee.startDate | date:'mediumDate'}}</span>
@@ -20,13 +16,21 @@
         <dd>
             <span>{{vm.employee.birthDate | date:'mediumDate'}}</span>
         </dd>
+        <dt><span data-translate="testApp.employee.position">Position</span></dt>
+        <dd>
+            <span>{{vm.employee.position}}</span>
+        </dd>
+        <dt><span data-translate="testApp.employee.address">Address</span></dt>
+        <dd>
+            <span>{{vm.employee.address}}</span>
+        </dd>
         <dt><span data-translate="testApp.employee.department">Department</span></dt>
         <dd>
-            <a ui-sref="department-detail({id:vm.employee.department.id})">{{vm.employee.department.name}}</a>
+            <a ui-sref="department-detail({id:vm.employee.department.id})">{{vm.employee.department.departmentName}}</a>
         </dd>
         <dt><span data-translate="testApp.employee.company">Company</span></dt>
         <dd>
-            <a ui-sref="company-detail({id:vm.employee.company.id})">{{vm.employee.company.name}}</a>
+            <a ui-sref="company-detail({id:vm.employee.company.id})">{{vm.employee.company.companyName}}</a>
         </dd>
     </dl>
 

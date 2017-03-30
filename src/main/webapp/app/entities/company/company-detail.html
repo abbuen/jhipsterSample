@@ -4,17 +4,21 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="testApp.company.name">Name</span></dt>
+        <dt><span data-translate="testApp.company.companyName">Company Name</span></dt>
         <dd>
-            <span>{{vm.company.name}}</span>
+            <span>{{vm.company.companyName}}</span>
+        </dd>
+        <dt><span data-translate="testApp.company.description">Description</span></dt>
+        <dd>
+            <span>{{vm.company.description}}</span>
         </dd>
         <dt><span data-translate="testApp.company.location">Location</span></dt>
         <dd>
             <span>{{vm.company.location}}</span>
         </dd>
-        <dt><span data-translate="testApp.company.description">Description</span></dt>
+        <dt><span data-translate="testApp.company.dateCreated">Date Created</span></dt>
         <dd>
-            <span>{{vm.company.description}}</span>
+            <span>{{vm.company.dateCreated | date:'mediumDate'}}</span>
         </dd>
     </dl>
 

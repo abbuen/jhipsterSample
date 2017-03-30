@@ -28,15 +28,18 @@ public class Employee implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "position")
-    private String position;
-
     @NotNull
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "address")
+    private String address;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -67,19 +70,6 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public Employee position(String position) {
-        this.position = position;
-        return this;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -104,6 +94,32 @@ public class Employee implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public Employee position(String position) {
+        this.position = position;
+        return this;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Employee address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Department getDepartment() {
@@ -157,9 +173,10 @@ public class Employee implements Serializable {
         return "Employee{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", position='" + position + "'" +
             ", startDate='" + startDate + "'" +
             ", birthDate='" + birthDate + "'" +
+            ", position='" + position + "'" +
+            ", address='" + address + "'" +
             '}';
     }
 }

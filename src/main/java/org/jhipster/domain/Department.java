@@ -25,8 +25,8 @@ public class Department implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "department_name", nullable = false)
+    private String departmentName;
 
     @Column(name = "description")
     private String description;
@@ -42,17 +42,17 @@ public class Department implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public Department name(String name) {
-        this.name = name;
+    public Department departmentName(String departmentName) {
+        this.departmentName = departmentName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public String getDescription() {
@@ -105,7 +105,7 @@ public class Department implements Serializable {
     public String toString() {
         return "Department{" +
             "id=" + id +
-            ", name='" + name + "'" +
+            ", departmentName='" + departmentName + "'" +
             ", description='" + description + "'" +
             ", dateCreated='" + dateCreated + "'" +
             '}';

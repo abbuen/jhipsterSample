@@ -45,14 +45,17 @@ public class EmployeeResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_POSITION = "AAAAAAAAAA";
-    private static final String UPDATED_POSITION = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final LocalDate DEFAULT_BIRTH_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_BIRTH_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_POSITION = "AAAAAAAAAA";
+    private static final String UPDATED_POSITION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -95,9 +98,10 @@ public class EmployeeResourceIntTest {
     public static Employee createEntity(EntityManager em) {
         Employee employee = new Employee()
             .name(DEFAULT_NAME)
-            .position(DEFAULT_POSITION)
             .startDate(DEFAULT_START_DATE)
-            .birthDate(DEFAULT_BIRTH_DATE);
+            .birthDate(DEFAULT_BIRTH_DATE)
+            .position(DEFAULT_POSITION)
+            .address(DEFAULT_ADDRESS);
         // Add required entity
         Department department = DepartmentResourceIntTest.createEntity(em);
         em.persist(department);
@@ -132,9 +136,10 @@ public class EmployeeResourceIntTest {
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate + 1);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
         assertThat(testEmployee.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testEmployee.getPosition()).isEqualTo(DEFAULT_POSITION);
         assertThat(testEmployee.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testEmployee.getBirthDate()).isEqualTo(DEFAULT_BIRTH_DATE);
+        assertThat(testEmployee.getPosition()).isEqualTo(DEFAULT_POSITION);
+        assertThat(testEmployee.getAddress()).isEqualTo(DEFAULT_ADDRESS);
     }
 
     @Test
@@ -204,9 +209,10 @@ public class EmployeeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())));
+            .andExpect(jsonPath("$.[*].birthDate").value(hasItem(DEFAULT_BIRTH_DATE.toString())))
+            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())));
     }
 
     @Test
@@ -221,9 +227,10 @@ public class EmployeeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(employee.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.birthDate").value(DEFAULT_BIRTH_DATE.toString()));
+            .andExpect(jsonPath("$.birthDate").value(DEFAULT_BIRTH_DATE.toString()))
+            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()));
     }
 
     @Test
@@ -246,9 +253,10 @@ public class EmployeeResourceIntTest {
         Employee updatedEmployee = employeeRepository.findOne(employee.getId());
         updatedEmployee
             .name(UPDATED_NAME)
-            .position(UPDATED_POSITION)
             .startDate(UPDATED_START_DATE)
-            .birthDate(UPDATED_BIRTH_DATE);
+            .birthDate(UPDATED_BIRTH_DATE)
+            .position(UPDATED_POSITION)
+            .address(UPDATED_ADDRESS);
 
         restEmployeeMockMvc.perform(put("/api/employees")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -260,9 +268,10 @@ public class EmployeeResourceIntTest {
         assertThat(employeeList).hasSize(databaseSizeBeforeUpdate);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
         assertThat(testEmployee.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testEmployee.getPosition()).isEqualTo(UPDATED_POSITION);
         assertThat(testEmployee.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testEmployee.getBirthDate()).isEqualTo(UPDATED_BIRTH_DATE);
+        assertThat(testEmployee.getPosition()).isEqualTo(UPDATED_POSITION);
+        assertThat(testEmployee.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test

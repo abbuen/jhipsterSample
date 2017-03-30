@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,14 +40,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = TestApp.class)
 public class CompanyResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_COMPANY_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_COMPANY_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
     private static final String UPDATED_LOCATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_DATE_CREATED = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_CREATED = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -87,9 +92,10 @@ public class CompanyResourceIntTest {
      */
     public static Company createEntity(EntityManager em) {
         Company company = new Company()
-            .name(DEFAULT_NAME)
+            .companyName(DEFAULT_COMPANY_NAME)
+            .description(DEFAULT_DESCRIPTION)
             .location(DEFAULT_LOCATION)
-            .description(DEFAULT_DESCRIPTION);
+            .dateCreated(DEFAULT_DATE_CREATED);
         return company;
     }
 
@@ -113,9 +119,10 @@ public class CompanyResourceIntTest {
         List<Company> companyList = companyRepository.findAll();
         assertThat(companyList).hasSize(databaseSizeBeforeCreate + 1);
         Company testCompany = companyList.get(companyList.size() - 1);
-        assertThat(testCompany.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCompany.getLocation()).isEqualTo(DEFAULT_LOCATION);
+        assertThat(testCompany.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testCompany.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testCompany.getLocation()).isEqualTo(DEFAULT_LOCATION);
+        assertThat(testCompany.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
     }
 
     @Test
@@ -139,28 +146,10 @@ public class CompanyResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkCompanyNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = companyRepository.findAll().size();
         // set the field null
-        company.setName(null);
-
-        // Create the Company, which fails.
-
-        restCompanyMockMvc.perform(post("/api/companies")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(company)))
-            .andExpect(status().isBadRequest());
-
-        List<Company> companyList = companyRepository.findAll();
-        assertThat(companyList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkLocationIsRequired() throws Exception {
-        int databaseSizeBeforeTest = companyRepository.findAll().size();
-        // set the field null
-        company.setLocation(null);
+        company.setCompanyName(null);
 
         // Create the Company, which fails.
 
@@ -184,9 +173,10 @@ public class CompanyResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(company.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())));
     }
 
     @Test
@@ -200,9 +190,10 @@ public class CompanyResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(company.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()));
     }
 
     @Test
@@ -224,9 +215,10 @@ public class CompanyResourceIntTest {
         // Update the company
         Company updatedCompany = companyRepository.findOne(company.getId());
         updatedCompany
-            .name(UPDATED_NAME)
+            .companyName(UPDATED_COMPANY_NAME)
+            .description(UPDATED_DESCRIPTION)
             .location(UPDATED_LOCATION)
-            .description(UPDATED_DESCRIPTION);
+            .dateCreated(UPDATED_DATE_CREATED);
 
         restCompanyMockMvc.perform(put("/api/companies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -237,9 +229,10 @@ public class CompanyResourceIntTest {
         List<Company> companyList = companyRepository.findAll();
         assertThat(companyList).hasSize(databaseSizeBeforeUpdate);
         Company testCompany = companyList.get(companyList.size() - 1);
-        assertThat(testCompany.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCompany.getLocation()).isEqualTo(UPDATED_LOCATION);
+        assertThat(testCompany.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testCompany.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testCompany.getLocation()).isEqualTo(UPDATED_LOCATION);
+        assertThat(testCompany.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
     }
 
     @Test

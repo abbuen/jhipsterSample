@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = TestApp.class)
 public class DepartmentResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_DEPARTMENT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -89,7 +89,7 @@ public class DepartmentResourceIntTest {
      */
     public static Department createEntity(EntityManager em) {
         Department department = new Department()
-            .name(DEFAULT_NAME)
+            .departmentName(DEFAULT_DEPARTMENT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .dateCreated(DEFAULT_DATE_CREATED);
         return department;
@@ -115,7 +115,7 @@ public class DepartmentResourceIntTest {
         List<Department> departmentList = departmentRepository.findAll();
         assertThat(departmentList).hasSize(databaseSizeBeforeCreate + 1);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
-        assertThat(testDepartment.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testDepartment.getDepartmentName()).isEqualTo(DEFAULT_DEPARTMENT_NAME);
         assertThat(testDepartment.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testDepartment.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
     }
@@ -141,10 +141,10 @@ public class DepartmentResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkDepartmentNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = departmentRepository.findAll().size();
         // set the field null
-        department.setName(null);
+        department.setDepartmentName(null);
 
         // Create the Department, which fails.
 
@@ -168,7 +168,7 @@ public class DepartmentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].departmentName").value(hasItem(DEFAULT_DEPARTMENT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())));
     }
@@ -184,7 +184,7 @@ public class DepartmentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(department.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.departmentName").value(DEFAULT_DEPARTMENT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()));
     }
@@ -208,7 +208,7 @@ public class DepartmentResourceIntTest {
         // Update the department
         Department updatedDepartment = departmentRepository.findOne(department.getId());
         updatedDepartment
-            .name(UPDATED_NAME)
+            .departmentName(UPDATED_DEPARTMENT_NAME)
             .description(UPDATED_DESCRIPTION)
             .dateCreated(UPDATED_DATE_CREATED);
 
@@ -221,7 +221,7 @@ public class DepartmentResourceIntTest {
         List<Department> departmentList = departmentRepository.findAll();
         assertThat(departmentList).hasSize(databaseSizeBeforeUpdate);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
-        assertThat(testDepartment.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testDepartment.getDepartmentName()).isEqualTo(UPDATED_DEPARTMENT_NAME);
         assertThat(testDepartment.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testDepartment.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
     }

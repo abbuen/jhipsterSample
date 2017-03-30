@@ -20,11 +20,12 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="testApp.employee.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="position"><span data-translate="testApp.employee.position">Position</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span data-translate="testApp.employee.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="birthDate"><span data-translate="testApp.employee.birthDate">Birth Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="department.name"><span data-translate="testApp.employee.department">Department</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="company.name"><span data-translate="testApp.employee.company">Company</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="position"><span data-translate="testApp.employee.position">Position</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span data-translate="testApp.employee.address">Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="department.departmentName"><span data-translate="testApp.employee.department">Department</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="company.companyName"><span data-translate="testApp.employee.company">Company</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,14 +33,15 @@
                 <tr ng-repeat="employee in vm.employees track by employee.id">
                     <td><a ui-sref="employee-detail({id:employee.id})">{{employee.id}}</a></td>
                     <td>{{employee.name}}</td>
-                    <td>{{employee.position}}</td>
                         <td>{{employee.startDate | date:'mediumDate'}}</td>
                         <td>{{employee.birthDate | date:'mediumDate'}}</td>
+                    <td>{{employee.position}}</td>
+                    <td>{{employee.address}}</td>
                     <td>
-                        <a ui-sref="department-detail({id:employee.department.id})">{{employee.department.name}}</a>
+                        <a ui-sref="department-detail({id:employee.department.id})">{{employee.department.departmentName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="company-detail({id:employee.company.id})">{{employee.company.name}}</a>
+                        <a ui-sref="company-detail({id:employee.company.id})">{{employee.company.companyName}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
