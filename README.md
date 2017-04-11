@@ -1,3 +1,4 @@
+Arlie Buen git sample
 # test
 This application was generated using JHipster 4.1.1, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.1.1](https://jhipster.github.io/documentation-archive/v4.1.1).
 
@@ -115,3 +116,5 @@ To configure CI for your project, run the ci-cd sub-generator (`yo jhipster:ci-c
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+
